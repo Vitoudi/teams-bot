@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import React, { ReactElement, useContext, useEffect } from 'react'
-import { Socket } from 'socket.io'
 import * as io from 'socket.io-client'
 import { GlobalContext } from '../../global/state'
 import Aside from './components/Aside'
