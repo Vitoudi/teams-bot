@@ -5,28 +5,43 @@ import { GlobalContext } from '../global/state'
 import useFetch from '../hooks/useFetch'
 import * as io from "socket.io-client";
 import styles from '../styles/Home.module.css'
+import useUpdateGlobalState from '../hooks/useUpdateGlobalState'
+import { useRouter } from 'next/router'
 
 export default function Home() {
   const url = "http://localhost:8000";
+  const router = useRouter()
   const makeRequest = useFetch(url)
+  const updateGlobalState = useUpdateGlobalState()
  const [globalState, setGlobalState] = useContext(GlobalContext);
 
  useEffect(() => {
-   makeRequest('/setCookies').then(() => {
-    const socket = io.connect("http://localhost:8000", {
-      withCredentials: true,
-    } as any);
-    putSocketConnectionOnGlobalState(socket);
-    socket.on("on_connected", (data) => {
-      console.log(data);
-    });
+   makeRequest("/check_logged_in").then((response) => {
+     const isLoggedIn = response.loggedIn;
 
-    socket.on("logged", () => {
-      console.log('LOGGED');
-    });
-   })
+     if (isLoggedIn) {
+        updateGlobalState('isLoggedIn', true)
+        router.push('/panel')
+     }
+
+     connectWithSocket();
+   });
    
  }, []);
+
+ function connectWithSocket() {
+   const socket = io.connect("http://localhost:8000", {
+     withCredentials: true,
+   } as any);
+   putSocketConnectionOnGlobalState(socket);
+   socket.on("on_connected", (data) => {
+     console.log(data);
+   });
+
+   socket.on("logged", () => {
+     console.log("LOGGED");
+   });
+ }
 
 
  function putSocketConnectionOnGlobalState(socket: SocketIOClient.Socket) {

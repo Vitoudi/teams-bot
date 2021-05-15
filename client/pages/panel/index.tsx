@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router'
 import React, { ReactElement, useContext, useEffect } from 'react'
+import { Socket } from 'socket.io'
 import * as io from 'socket.io-client'
 import { GlobalContext } from '../../global/state'
 import Aside from './components/Aside'
 import InAndOutLogs from './components/logsContainer/components/InAndOutLogs'
 import LogsContainer from './components/logsContainer/LogsContainer'
 import styles from '../../styles/panel.module.css'
+import useFetch from '../../hooks/useFetch'
 
 
 interface Props {
@@ -13,6 +15,7 @@ interface Props {
 }
 
 export default function panel({}: Props): ReactElement {
+    const makeRequest = useFetch()
     const router = useRouter()
     const [globalState, setGlobalState] = useContext(GlobalContext)
 

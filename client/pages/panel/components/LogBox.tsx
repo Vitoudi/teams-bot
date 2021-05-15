@@ -5,7 +5,7 @@ interface Props {
     title: string
 }
 
-const LogBox: React.FC<Props> = ({title, children}) => {
+export const LogBox: React.FC<Props> = ({title, children}) => {
     return (
         <div className={styles['container']}>
             <h2>{title}</h2>
@@ -15,5 +15,3 @@ const LogBox: React.FC<Props> = ({title, children}) => {
         </div>
     )
 }
-
-export default LogBox

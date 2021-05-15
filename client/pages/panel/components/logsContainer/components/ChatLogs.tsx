@@ -1,6 +1,6 @@
 import React, { ReactElement, useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../../../../../global/state'
-import LogBox from '../../LogBox'
+import { LogBox } from '../../LogBox'
 
 interface Props {
     
