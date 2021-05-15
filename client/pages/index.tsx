@@ -2,11 +2,11 @@ import Head from 'next/head'
 import { useContext, useEffect } from 'react'
 import Bord from '../components/bord/bord'
 import { GlobalContext } from '../global/state'
-import useFetch from '../hooks/useFetch'
 import * as io from "socket.io-client";
 import styles from '../styles/Home.module.css'
 import useUpdateGlobalState from '../hooks/useUpdateGlobalState'
 import { useRouter } from 'next/router'
+import useFetch from '../hooks/useFetch';
 
 export default function Home() {
   const url = "http://localhost:8000";
