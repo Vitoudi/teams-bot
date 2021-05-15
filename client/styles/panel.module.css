@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+}
+
+.aside {
+  min-height: 100vh;
+  padding: 20px;
+  width: 58vw;
+  background-color: rgb(245, 245, 245);
+  box-shadow: 1px 1px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.aside ul {
+  margin-top: 30px;
+  list-style: none;
+}
+
+.aside ul li {
+  margin: 20px 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media only screen and (max-width: 470px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .aside {
+    min-height: 30vh;
+    padding: 20px;
+    width: 100%;
+    background-color: rgb(245, 245, 245);
+    box-shadow: 1px 1px 2px 3px rgba(0, 0, 0, 0.1);
+  }
+}

@@ -1,0 +1,10 @@
+.logo {
+    text-align: center;
+    margin: 20px 0px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.logo span {
+    color: var(--teams-color);
+}
