@@ -1,5 +1,6 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import Logo from '../../../components/Logo'
+import { GlobalContext } from '../../../global/state'
 import useFetch from '../../../hooks/useFetch'
 import styles from '../../../styles/panel.module.css'
 
@@ -8,10 +9,11 @@ interface Props {
 }
 
 export default function Aside({}: Props): ReactElement {
+    const globalState = useContext(GlobalContext)[0]
     const makeRequest = useFetch()
 
     function handleClick() {
-        makeRequest('http://localhost:8000/close', "POST")
+        makeRequest({url: 'http://localhost:8000/close', method: 'POST', token: globalState.jsonToken})
     }
 
     return (

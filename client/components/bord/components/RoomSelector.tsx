@@ -19,13 +19,13 @@ export default function RoomSelector({}: Props): ReactElement {
 
     useEffect(() => {
         const url = '/room_names';
-        makeRequest(url).then(roomNames => setRooms(roomNames)).catch(err => console.log(err))
+        makeRequest({url}).then(roomNames => setRooms(roomNames)).catch(err => console.log(err))
     }, [])
 
     async function makeRequesToObserveRoom() {
         const url = "/observe_room";
         console.log('name: ', roomName);
-        const res = await makeRequest(url, "POST", {roomName});
+        const res = await makeRequest({url, method: "POST", data: {roomName}});
 
         router.push('/panel')
         updateGlobalState()

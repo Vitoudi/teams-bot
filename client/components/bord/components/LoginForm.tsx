@@ -4,12 +4,14 @@ import {Mode} from '../bord';
 import styles from "../../../styles/Bord.module.css";
 import Loading from '../../Loading';
 import ErrorMsg from './ErrorMsg';
+import useUpdateGlobalState from '../../../hooks/useUpdateGlobalState';
 
 interface Props {
     setMode: React.Dispatch<React.SetStateAction<Mode>>
 }
 
 export default function LoginForm({setMode}: Props): ReactElement {
+  const updateGlobalState = useUpdateGlobalState();
   const makeRequest = useFetch("http://localhost:8000");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,12 +20,17 @@ export default function LoginForm({setMode}: Props): ReactElement {
   const [hasFetchError, setHasFetchError] = useState(false)
 
   async function makeRequesToInitTeams() {
+    
     console.log('makin request to init teams')
+    if (!localStorage) return;
+
     try {
       const url = '/turn_on'
-      const res = await makeRequest(url, "POST", { email, password });
+      const jsonToken = await makeRequest({url, method: "POST", data: { email, password } });
 
-      console.log('res: ', res)
+      if(typeof jsonToken !== 'string') return
+
+      localStorage.setItem('jsonToken', JSON.stringify(jsonToken))
       setMode("roomSelector")
       setIsLoading(true)
     } catch {

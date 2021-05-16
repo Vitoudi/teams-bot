@@ -7,6 +7,7 @@ import InAndOutLogs from './components/logsContainer/components/InAndOutLogs'
 import LogsContainer from './components/logsContainer/LogsContainer'
 import styles from '../../styles/panel.module.css'
 import useFetch from '../../hooks/useFetch'
+import useUpdateGlobalState from '../../hooks/useUpdateGlobalState'
 
 
 interface Props {

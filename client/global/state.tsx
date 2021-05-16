@@ -3,9 +3,10 @@ import React, { useState } from "react";
 interface GlobalState {
   isLoggedIn: boolean;
   socket: SocketIOClient.Socket | null;
+  jsonToken: string;
 }
 
-export type GlobalStatePropName = "isLoggedIn" | "socket";
+export type GlobalStatePropName = "isLoggedIn" | "socket" | 'jsonToken';
 
 export type GlobalStateContextType = [
   globalState: GlobalState,
@@ -17,6 +18,7 @@ export const GlobalContext = React.createContext<GlobalStateContextType>(null);
 const defaultState: GlobalState = {
   isLoggedIn: false,
   socket: null,
+  jsonToken: '',
 };
 
 export default function GlobalContextProvider({ children }) {

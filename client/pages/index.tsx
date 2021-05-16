@@ -16,12 +16,17 @@ export default function Home() {
  const [globalState, setGlobalState] = useContext(GlobalContext);
 
  useEffect(() => {
-   makeRequest("/check_logged_in").then((response) => {
+   if (!localStorage) return;
+   const jsonToken = JSON.parse(localStorage.getItem('jsonToken')) || ''
+
+   makeRequest({ url: "/check_logged_in", token: jsonToken }).then((response) => {
      const isLoggedIn = response.loggedIn;
 
+     console.log(response)
+
      if (isLoggedIn) {
-        updateGlobalState('isLoggedIn', true)
-        router.push('/panel')
+       updateGlobalState("isLoggedIn", true);
+       router.push("/panel");
      }
 
      connectWithSocket();
