@@ -9,10 +9,17 @@ interface MakeRequestOptions {
   token?: string
 }
 
-export default function useFetch(defaultUrlStart?: string) {
-  const urlStart = defaultUrlStart || "";
+interface UseFetchOptions {
+  defaultUrlStart?: string
+  defaultToken?: string
+}
+
+export default function useFetch(options?: UseFetchOptions) {
+  const urlStart = options?.defaultUrlStart || "";
 
   function getRequestOptions(method: HttpMethod, data: any, token: string) {
+    token = token ?? options?.defaultToken ?? '';
+
     const getOptions: RequestInit = {
       credentials: "include",
       headers: {

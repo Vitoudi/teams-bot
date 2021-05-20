@@ -12,7 +12,7 @@ interface Props {
 export default function RoomSelector({}: Props): ReactElement {
     const [globalState, setGlobalState] = useContext(GlobalContext)
     const router = useRouter();
-    const makeRequest = useFetch("http://localhost:8000");
+    const makeRequest = useFetch({ defaultUrlStart: "http://localhost:8000" });
     const [rooms, setRooms] = useState([])
     const [roomName, setRoomName] = useState('')
     const [isLoading, setIsLoading] = useState(false)

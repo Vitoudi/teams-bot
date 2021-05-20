@@ -7,9 +7,40 @@
   align-self: flex-start;
   height: 43vh;
   width: calc(52vw - 200px);
+  
 }
 
-@media only screen and (max-width: 470px) {
+.logs-container {
+
+  margin-top: 2px;
+  height: 90%;
+  overflow-y: auto;
+}
+
+.log {
+  margin: 8px;
+  display: flex;
+}
+
+.log-msg {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.green-log {
+  color: green;
+}
+
+.red-log {
+  color: darkred;
+}
+
+.date-place {
+  margin-left: auto;
+
+}
+
+@media only screen and (max-width: 800px) {
   .container {
     width: 85%;
   }

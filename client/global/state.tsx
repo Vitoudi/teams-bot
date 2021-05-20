@@ -4,6 +4,7 @@ interface GlobalState {
   isLoggedIn: boolean;
   socket: SocketIOClient.Socket | null;
   jsonToken: string;
+  apiUrl: string
 }
 
 export type GlobalStatePropName = "isLoggedIn" | "socket" | 'jsonToken';
@@ -18,7 +19,8 @@ export const GlobalContext = React.createContext<GlobalStateContextType>(null);
 const defaultState: GlobalState = {
   isLoggedIn: false,
   socket: null,
-  jsonToken: '',
+  jsonToken: "",
+  apiUrl: "http://localhost:8000",
 };
 
 export default function GlobalContextProvider({ children }) {

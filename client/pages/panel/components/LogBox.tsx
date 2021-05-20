@@ -7,13 +7,11 @@ interface Props {
 
 const LogBox: React.FC<Props> = ({title, children}) => {
     return (
-        <div className={styles['container']}>
-            <h2>{title}</h2>
-            <div>
-                {children}
-            </div>
-        </div>
-    )
+      <div className={styles["container"]}>
+        <h2>{title}</h2>
+        <div className={styles["logs-container"]}>{children}</div>
+      </div>
+    );
 }
 
 export default LogBox

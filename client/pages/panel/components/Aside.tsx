@@ -9,11 +9,14 @@ interface Props {
 }
 
 export default function Aside({}: Props): ReactElement {
-    const globalState = useContext(GlobalContext)[0]
-    const makeRequest = useFetch()
+    const globalState = useContext(GlobalContext)[0];
+    const makeRequest = useFetch({ defaultUrlStart: globalState.apiUrl });
 
     function handleClick() {
-        makeRequest({url: 'http://localhost:8000/close', method: 'POST', token: globalState.jsonToken})
+        if (!localStorage) return;
+        makeRequest({url: '/close', method: 'POST', token: globalState.jsonToken}).then(() => {
+            localStorage.removeItem('jsonToken');
+        })
     }
 
     return (
@@ -22,7 +25,7 @@ export default function Aside({}: Props): ReactElement {
             <ul>
                 <li>Painel</li>
                 <li>Configurações</li>
-                <li style={{color: 'darkred'}} onClick={handleClick}>Fechar</li>
+                <li style={{color: 'darkred', cursor: 'pointer'}} onClick={handleClick}>Fechar</li>
             </ul>
         </aside>
     )
