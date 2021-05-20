@@ -26,7 +26,7 @@ export class LogManager {
   }
 
   private static sendEvent(eventName: string, channel: string) {
-    appState.socket.emit(eventName, channel)
+    appState?.socket?.emit(eventName, channel)
   }
 }
 

@@ -42,7 +42,7 @@ export class MeetingService implements RoomObserver {
 
   public async onNewMeeting() {
     const chanelName = await this.getChanelName();
-    appState.currentChanelName = chanelName;
+    appState.currentChanelName = chanelName || '';
 
     this.startMeetingCycle();
   }

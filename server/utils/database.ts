@@ -1,6 +1,6 @@
-import * as mongoose from 'mongoose'
+import mongoose from 'mongoose'
 
-export const dbUri = process.env.DB_URI
+export const dbUri = process.env.DB_URI!
 
 export const mongooseConnection = mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true})
 

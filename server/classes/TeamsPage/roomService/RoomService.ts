@@ -5,12 +5,10 @@ import { PageActions } from "../PageActions";
 declare const notifyRoomObservers: Function;
 
 export class RoomService implements Subject<RoomObserver> {
-  roomIsActive: boolean;
   observers: RoomObserver[];
   hasExposedNotifyRoomObserversFunction: boolean;
   private chanelsListSelector: string;
   private activeCallSelector: string;
-  private pageActions: PageActions;
 
   constructor(private page: Page) {
     this.chanelsListSelector = "ul.school-app-team-channel";
@@ -51,7 +49,7 @@ export class RoomService implements Subject<RoomObserver> {
               );
 
               if (matchSelector) {
-                record.target.parentElement.click();
+                record.target?.parentElement?.click();
                 notifyRoomObservers();
               }
             });

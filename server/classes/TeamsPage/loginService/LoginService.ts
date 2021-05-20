@@ -19,26 +19,38 @@ export class LoginService {
   public async login() {
     return new Promise(async (resolve, reject) => {
       try {
-        const emailFormBtnSelector = "input[type=submit]";
-        const acceptBtnSelector = '#idSIButton9';
-    
-        await this.submitEmailForm()
-        await this.submitPasswordForm()
-        await this.page.waitForSelector(acceptBtnSelector);
-        await this.pageActions.clickBtn(emailFormBtnSelector);
-        await this.page.waitForNavigation();
-        await this.page.waitForTimeout(10000);
-        await this.page.waitForSelector("teams-grid");
-        appState.isActive = true;
-        resolve(null);
+        await this.conventinalLogin()
       } catch (err) {
-        reject(err);
+        await this.handleUnexpectedLoginStep()
       }
+
+      resolve(null);
     });
   }
 
-  private conventinalLogin() {
-    //TODO
+  private async conventinalLogin() {
+    const emailFormBtnSelector = "input[type=submit]";
+    const acceptBtnSelector = "#idSIButton9";
+
+    await this.submitEmailForm();
+    await this.submitPasswordForm();
+    await this.page.waitForSelector(acceptBtnSelector);
+    await this.pageActions.clickBtn(emailFormBtnSelector);
+    await this.page.waitForNavigation();
+    await this.waitForTeamsHomePage();
+  }
+
+  private async handleUnexpectedLoginStep() {
+    const skipButtonSelector = '.table[role="button"]'
+    await this.page.click(skipButtonSelector)
+    await this.page.waitForNavigation();
+    await this.waitForTeamsHomePage();
+  }
+
+  private async waitForTeamsHomePage() {
+    await this.page.waitForTimeout(10000);
+    await this.page.waitForSelector("teams-grid");
+    appState.isActive = true;
   }
 
   private async submitEmailForm() {

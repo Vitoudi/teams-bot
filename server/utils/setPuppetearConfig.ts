@@ -1,4 +1,4 @@
-import * as puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer';
 import { appState } from '../global/appState';
 
 export async function getConfiguredPuppeteerPage() {

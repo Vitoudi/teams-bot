@@ -1,5 +1,5 @@
 require('dotenv').config({path: __dirname + '/.env'});
-import * as express from "express";
+import express from "express";
 import { handleClose, handleTurnOn } from "./controllers/turnOnController";
 import { checkIfTeamsWasInitialized } from "./middlewares/checkIfTeamsWasInitialized";
 import { handleGetRoomNames, handleObserveRoom } from "./controllers/roomControllers";

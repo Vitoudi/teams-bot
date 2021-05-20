@@ -10,7 +10,7 @@ import { Socket } from "socket.io";
 
 export class TeamsPage implements MeetingLeaveObserver {
   url: string;
-  isActive: boolean;
+
   private pageActions: PageActions;
   private roomService: RoomService;
   private meetingService: MeetingService;
@@ -49,8 +49,7 @@ export class TeamsPage implements MeetingLeaveObserver {
   }
 
   public async closeTeams() {
-    await appState.browser.close()
-    this.isActive = false
+    await appState.browser?.close()
     appState.isActive = false;
     appState.browser = null;
   }

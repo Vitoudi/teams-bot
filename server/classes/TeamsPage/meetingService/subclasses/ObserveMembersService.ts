@@ -32,9 +32,10 @@ export class ObserveMembersService {
         const observer = new MutationObserver((records) => {
           records.forEach((record) => {
             const str = record.target.textContent;
+            if (!str) return;
             const currentNumberOfMembers = +str.replace("+", "");
 
-            if (currentNumberOfMembers <= NUMBER_OF_MEMBERS_TO_LEAVE)
+            if (currentNumberOfMembers <= (NUMBER_OF_MEMBERS_TO_LEAVE as number))
               leaveMeeting();
           });
         });
@@ -54,7 +55,8 @@ export class ObserveMembersService {
     await this.page.waitForSelector(selector);
 
     return await this.page.$eval(selector, (numberOfMembersContainer) => {
-      const num = +numberOfMembersContainer.textContent.replace("+", "");
+      if (!numberOfMembersContainer) return;
+      const num = +numberOfMembersContainer.textContent?.replace("+", "")!;
 
       return num;
     });
@@ -63,7 +65,7 @@ export class ObserveMembersService {
   private async getNumberOfMembersToLeave() {
     const INITIAL_NUMBER_OF_MEMBERS = await this.getNumberOfMembers();
     console.log("initial: ", INITIAL_NUMBER_OF_MEMBERS);
-    return getTwoThirdsInt(INITIAL_NUMBER_OF_MEMBERS);
+    return getTwoThirdsInt(INITIAL_NUMBER_OF_MEMBERS as number);
   }
 
   private async exposeNeededFunctions() {

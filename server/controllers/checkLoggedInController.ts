@@ -11,7 +11,7 @@ export function handleCheckLoggedIn(req: Request, res: Response) {
       return res.json({loggedIn: false});
     }
 
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!, (err, user) => {
         if (err) {
             console.log(err)
             return res.json({ loggedIn: false });

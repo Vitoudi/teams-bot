@@ -9,8 +9,8 @@ declare const emit: Function;
 
 export class ChatService {
   alreadySendMsg: boolean;
-  hasExposedFunctions: boolean;
   private pageActions: PageActions;
+  hasExposedFunctions: boolean = false;
 
   constructor(private page: Page) {
     this.alreadySendMsg = false;
@@ -30,7 +30,7 @@ export class ChatService {
     await this.page.$eval(
       selector,
       (chatInput, text) => {
-        function simulateEvent(eventName, element) {
+        function simulateEvent(eventName: string, element: any) {
           const event = new Event(eventName, {
             bubbles: true,
             cancelable: false,
@@ -79,8 +79,8 @@ export class ChatService {
             const addedNodes = record.addedNodes;
 
             addedNodes.forEach((node) => {
-              const msgContent = node.textContent.toLocaleLowerCase();
-              if (msgContent.length >= 22 || !msgContent) return;
+              const msgContent = node?.textContent?.toLocaleLowerCase();
+              if (!msgContent || msgContent?.length >= 22) return;
 
               if (msgContent.includes("presente")) {
                 console.log("includes presente!");

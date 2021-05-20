@@ -38,7 +38,7 @@ export class JoinMeetingService {
 
     await this.page.$$eval(selector, (buttons) => {
       buttons.forEach((btn) => {
-        const isPressed = eval(btn.getAttribute("aria-pressed"));
+        const isPressed = eval(btn.getAttribute("aria-pressed")!);
         if (!isPressed) return;
         (btn as any).click();
       });
