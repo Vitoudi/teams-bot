@@ -1,0 +1,18 @@
+POST http://localhost:8000/turn_on HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "14509303@maristavirtual.org.br",
+    "password": "sidebolo130"
+}
+
+###
+GET http://localhost:8000/room_names HTTP/1.1
+
+###
+POST http://localhost:8000/observe_room HTTP/1.1
+Content-Type: application/json
+
+{
+    "roomName": "Turma 23 B - Colégio Marista João Paulo II - 2021"
+}
