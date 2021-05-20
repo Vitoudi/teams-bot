@@ -42,7 +42,7 @@ export default function Log({ log }: Props): ReactElement {
       >
         {getCorrespondingLogMsg(log?.eventName) || ''} -
       </span>
-      {log.channel}
+      {log?.channel}
       <span className={styles["date-place"]}>{getDateFromLog(log.date)}</span>
     </div>
   );
