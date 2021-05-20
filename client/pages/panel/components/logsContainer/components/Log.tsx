@@ -19,6 +19,7 @@ export default function Log({ log }: Props): ReactElement {
   }
 
   function getCorrespondingLogMsg(eventName: SocketEventName) {
+    console.log(log);
     if (eventName === "entered_meeting") return "Entrou";
     if (eventName === "left_meeting") return "Saiu";
 
@@ -35,11 +36,11 @@ export default function Log({ log }: Props): ReactElement {
   return (
     <div ref={logRef} className={styles["log"]}>
       <span
-        className={`${styles[getCorrespondingClassNameForLog(log.eventName)]} ${
+        className={`${styles[getCorrespondingClassNameForLog(log?.eventName) || '']} ${
           styles["log-msg"]
         }`}
       >
-        {getCorrespondingLogMsg(log.eventName)} -
+        {getCorrespondingLogMsg(log?.eventName) || ''} -
       </span>
       {log.channel}
       <span className={styles["date-place"]}>{getDateFromLog(log.date)}</span>
