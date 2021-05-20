@@ -27,6 +27,7 @@ export default function ChatLogs(): ReactElement {
     return (
         <LogBox title="Presenças:">
             {msgs.length? msgs.map(log => {
+                if (!log) return 'not log';
                 return <Log log={log}/>
             }) : ''}
         </LogBox>
