@@ -53,8 +53,6 @@ function listen() {
   });
 }
 
-onMongoConnection(() => !listening && listen())
-
-
-
-
+onMongoConnection(() => {
+  !listening && listen();
+})

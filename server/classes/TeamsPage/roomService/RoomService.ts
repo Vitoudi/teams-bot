@@ -1,17 +1,16 @@
 import { Page } from "puppeteer";
-import { RoomObserver, Subject } from "../../observerPettern/ObserverPettern";
-import { PageActions } from "../PageActions";
+import { RoomObserver, Subject } from "../../observerPattern/observerPattern";
 
 declare const notifyRoomObservers: Function;
 
 export class RoomService implements Subject<RoomObserver> {
   observers: RoomObserver[];
   hasExposedNotifyRoomObserversFunction: boolean;
-  private chanelsListSelector: string;
+  private channelsListSelector: string;
   private activeCallSelector: string;
 
   constructor(private page: Page) {
-    this.chanelsListSelector = "ul.school-app-team-channel";
+    this.channelsListSelector = "ul.school-app-team-channel";
     this.activeCallSelector = "span.ts-active-calls-counter";
     this.observers = [];
     this.hasExposedNotifyRoomObserversFunction = false;
@@ -22,7 +21,7 @@ export class RoomService implements Subject<RoomObserver> {
       this.exposeNotifyRoomObserversFunction();
     }
 
-    const selector = this.chanelsListSelector;
+    const selector = this.channelsListSelector;
     await this.enterRoom(roomName);
     await this.page.waitForSelector(selector);
 
@@ -65,11 +64,11 @@ export class RoomService implements Subject<RoomObserver> {
         meetingInProgressClassName
       );
     } catch {
-      this.handleEnexpctedScreenAfterLeaveMeeting()
+      this.handleUnexpectedScreenAfterLeaveMeeting()
     }
   }
 
-  private async handleEnexpctedScreenAfterLeaveMeeting() {
+  private async handleUnexpectedScreenAfterLeaveMeeting() {
     const selector = ".ts-btn";
     await this.page.click(selector);
     this.setRoomMutationObserver();

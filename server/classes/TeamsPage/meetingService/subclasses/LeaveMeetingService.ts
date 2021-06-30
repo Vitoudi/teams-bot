@@ -4,29 +4,27 @@ import { LogManager } from "../../../../models/Logs";
 import {
   MeetingLeaveObserver,
   Subject,
-} from "../../../observerPettern/ObserverPettern";
+} from "../../../observerPattern/observerPattern";
 
 export class LeaveMeetingService implements Subject<MeetingLeaveObserver> {
-  observers: MeetingLeaveObserver[];
-  alredyLeftTheMeeting: boolean;
+  private observers: MeetingLeaveObserver[] = [];
+  public alreadyLeftTheMeeting: boolean = false;
 
-  constructor(private page: Page) {
-    this.observers = [];
-    this.alredyLeftTheMeeting = false;
-  }
+  constructor(private page: Page) { }
 
   public async leaveMeeting() {
-    if (this.alredyLeftTheMeeting) return;
+    console.log("already in leave: ", this.alreadyLeftTheMeeting)
+    if (this.alreadyLeftTheMeeting) return;
 
     const selector = "#hangup-button";
     this.notifyObservers();
 
     LogManager.createLog({
       eventName: "left_meeting",
-      channel: appState.currentChanelName,
+      channel: appState.currentChannelName,
     });
 
-    this.alredyLeftTheMeeting = true;
+    this.alreadyLeftTheMeeting = true;
 
     await this.page.$eval(selector, (btn) => {
       (btn as any).click();

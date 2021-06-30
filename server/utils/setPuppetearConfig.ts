@@ -9,9 +9,9 @@ export async function getConfiguredPuppeteerPage() {
         "--use-fake-device-for-media-stream",
       ],
     });
-    appState.browser = browser
+    appState.browser = browser;
     const page = await browser.newPage();
-    await page.setViewport({ width: 1080, height: 620 });
+    await page.setViewport({ width: 700, height: 580 });
 
     return page
 }

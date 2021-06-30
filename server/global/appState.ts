@@ -7,7 +7,7 @@ export interface IAppState {
   browser: Browser | null
   teamsPage: TeamsPage | null
   socket: Socket | null
-  currentChanelName: string
+  currentChannelName: string
   currentEmail: string
 }
 
@@ -15,7 +15,7 @@ export const appState: IAppState = {
   isActive: false,
   teamsPage: null,
   socket: null,
-  currentChanelName: '',
+  currentChannelName: '',
   currentEmail: '',
   browser: null
 }
